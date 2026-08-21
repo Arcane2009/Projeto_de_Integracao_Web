@@ -1,0 +1,115 @@
+/* =========================================================
+   Estilos Globais e Paleta Harmonizada com a Logo (#88c4b0)
+   ========================================================= */
+   * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f2f7f5;
+    color: #2d3748;
+    padding: 40px 20px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   Cabeçalho e Logo no Topo
+   ========================================================= */
+
+/* Título e Logo adicionada via CSS ::before (Sem precisar alterar o HTML) */
+h1 {
+    text-align: center;
+    color: #2c5e52;
+    margin-bottom: 35px;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+h1::before {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 16px auto;
+    background-image: url("Imagens/logo.png"); /* Certifique-se do nome do arquivo */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: drop-shadow(0 4px 8px rgba(136, 196, 176, 0.3));
+}
+
+/* Classe alternativa caso prefira adicionar a tag <img> diretamente no HTML */
+.logo-topo {
+    display: block;
+    width: 110px;
+    height: auto;
+    margin: 0 auto 16px auto;
+    filter: drop-shadow(0 4px 8px rgba(136, 196, 176, 0.3));
+}
+
+/* =========================================================
+   Container da Lista de Animais (Grid Responsivo)
+   ========================================================= */
+.lista-animais {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   Cartão do Animal
+   ========================================================= */
+.cartao-animal {
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e2ede8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Efeito Hover com destaque no tom da logo */
+.cartao-animal:hover {
+    transform: translateY(-6px);
+    border-color: #88c4b0;
+    box-shadow: 0 10px 25px rgba(136, 196, 176, 0.25);
+}
+
+/* Foto do Animal */
+.cartao-animal img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Nome do Animal */
+.cartao-animal h2 {
+    color: #2c5e52;
+    font-size: 1.35rem;
+    margin: 18px 18px 10px 18px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #eaf5f1;
+}
+
+/* Detalhes do Animal */
+.cartao-animal p {
+    color: #5a6a64;
+    font-size: 0.95rem;
+    margin: 0 18px 8px 18px;
+}
+
+.cartao-animal p:last-child {
+    margin-bottom: 18px;
+}
+
+.cartao-animal strong {
+    color: #2d3748;
+}

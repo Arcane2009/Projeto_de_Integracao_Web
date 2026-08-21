@@ -1,0 +1,93 @@
+
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Fundo da tela */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e9ecef;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  /* Card fixo em 400px */
+  .page-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Logo Aumentada */
+  .logo {
+    width: 95%; /* Ocupa quase toda a largura do card de 400px */
+    height: auto;
+    display: block;
+    margin-bottom: 24px;
+  }
+  
+  /* Grupo de botões reduzidos */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os botões */
+    gap: 12px;
+    width: 100%;
+  }
+  
+  /* Botões de Imagem Menores */
+  .btn-link {
+    display: block;
+    width: 75%; /* Diminuído para 75% da largura */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  
+  .btn-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Novo Botão: Cadastrar o Animal */
+  .btn-cadastrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 75%; /* Mesma largura reduzida dos outros botões */
+    padding: 10px 12px;
+    background-color: #3baea0; /* Verde proporcional à paleta */
+    border: 2px solid #000000;
+    border-radius: 18px;
+    color: #000000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    gap: 6px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  
+  .icon-plus {
+    width: 26px;
+    height: 26px;
+  }
+  
+  /* Efeito ao passar o mouse em qualquer botão */
+  .btn-link:hover,
+  .btn-cadastrar:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+  }
