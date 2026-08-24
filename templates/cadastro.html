@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Animal - MapPet</title>
-  <link rel="stylesheet" href="cada.css">
+  <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
 
@@ -33,7 +33,12 @@
 
       <div class="input-group">
         <label for="local">Local</label>
-        <input type="text" id="local" name="local" placeholder="Clínica, Pet Shop ou Cidade" required>
+        <input type="text" id="local" name="local" placeholder="Clínica ou Pet Shop" required>
+      </div>
+
+      <div class = "input-group">
+        <label for="pet-imagem">Carregue uma Imagem do seu Pet</label>
+        <input type="file" id="pet-imagem" name="pet-imagem" placeholder="Imagem do seu pet" >
       </div>
 
       <!-- Botão para enviar o formulário -->
@@ -41,7 +46,7 @@
       
     </form>
 
-    <a href="index.html" class="btn-voltar">← Voltar ao Início</a>
+    <a href="/" class="btn-voltar">← Voltar ao Início</a>
 
   </div>
 

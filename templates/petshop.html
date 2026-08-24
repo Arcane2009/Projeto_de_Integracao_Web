@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="static/style.css">
+  <title>Perfil dos Animais</title>
+</head>
+<body>
+
+  <h1>Perfil dos Animais em Pet Shops</h1>
+
+  <!-- Lista contendo todos os cartões de animais -->
+  <div class="lista-animais">
+      <h1>Lista de Clientes</h1>
+      <table border="1">
+          <thead class="tabela">
+              <tr>
+                  <th>CPF</th>
+                  <th>Primeiro Nome</th>
+                  <th>Sobrenome</th>
+                  <th>Idade</th>
+                  <th>Ações</th>
+              </tr>
+          </thead>
+        <article class="cartao-animal">
+          <tbody class="tabela">
+              {% for cliente in clientes %}
+                  <tr>
+                      <td>{{ cliente.CPF }}</td>
+                      <td>{{ cliente.PRIMEIRO_NOME }}</td>
+                      <td>{{ cliente.SOBRENOME }}</td>
+                      <td>{{ cliente.IDADE }}</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+        </article>
+      </table>
+
+  </div>
+
+  <a href="/" class="btn-voltar">← Voltar ao Início</a>
+
+</body>
+</html>
