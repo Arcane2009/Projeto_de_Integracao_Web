@@ -14,7 +14,7 @@
     <h1 class="page-title">Cadastro de Animal</h1>
 
     <!-- Formulário com 4 campos verticais -->
-    <form class="form-cadastro">
+    <form class="form-cadastro", action="/cadastrar", method="POST">
       
       <div class="input-group">
         <label for="nome">Nome</label>
@@ -32,13 +32,17 @@
       </div>
 
       <div class="input-group">
-        <label for="local">Local</label>
-        <input type="text" id="local" name="local" placeholder="Clínica ou Pet Shop" required>
+        <label for="local">Escolha um local:</label>
+      <select id="select" name="clini_shop">
+        <option value="clini">Clínica</option>
+        <option value="petshop" selected>Pet-Shop</option>
+      </select>
+
       </div>
 
       <div class = "input-group">
         <label for="pet-imagem">Carregue uma Imagem do seu Pet</label>
-        <input type="file" id="pet-imagem" name="pet-imagem" placeholder="Imagem do seu pet" >
+        <input type="file" id="pet_imagem" name="pet-imagem" placeholder="Imagem do seu pet" >
       </div>
 
       <!-- Botão para enviar o formulário -->

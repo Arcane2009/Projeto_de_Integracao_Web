@@ -11,25 +11,16 @@
 
   <!-- Lista contendo todos os cartões de animais -->
   <div class="lista-animais">
-      <h1>Lista de Clientes</h1>
-      <table border="1">
-          <thead class="tabela">
-              <tr>
-                  <th>CPF</th>
-                  <th>Primeiro Nome</th>
-                  <th>Sobrenome</th>
-                  <th>Idade</th>
-                  <th>Ações</th>
-              </tr>
-          </thead>
         <article class="cartao-animal">
           <tbody class="tabela">
-              {% for cliente in clientes %}
+              {% for animal in animal1 %}
                   <tr>
-                      <td>{{ cliente.CPF }}</td>
-                      <td>{{ cliente.PRIMEIRO_NOME }}</td>
-                      <td>{{ cliente.SOBRENOME }}</td>
-                      <td>{{ cliente.IDADE }}</td>
+                      <td>{{ animal1.ANIMAL_ID }}</td>
+                      <td>{{ animal1.NOME }}</td>
+                      <td>{{ animal1.RACA }}</td>
+                      <td>{{ animal1.IDADE }}</td>
+                      <td>{{ animal1.LOCAL }}</td>
+                      <td>{{ animal1.FOTO }}</td>
                   </tr>
               {% endfor %}
           </tbody>

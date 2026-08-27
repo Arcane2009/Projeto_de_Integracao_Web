@@ -11,62 +11,23 @@
 
   <!-- Lista contendo todos os cartões de animais -->
   <div class="lista-animais">
-
     <article class="cartao-animal">
-      <h2>Hantaro</h2>
-      <img src="static/Imagens/hamster-chines-capa.png" alt="Hantaro">
-      <p><strong>ID:</strong> 10007</p>
-      <p><strong>Raça:</strong> Chinês</p>
-      <p><strong>Idade:</strong> 2 anos</p>
-      <p><strong>Local:</strong> Belo Horizonte - MG</p>
+      <tbody class="tabela">
+          {% for animal in animal1 %}
+              <tr>
+                  <td>{{ animal1.ANIMAL_ID }}</td>
+                  <td>{{ animal1.NOME }}</td>
+                  <td>{{ animal1.RACA }}</td>
+                  <td>{{ animal1.IDADE }}</td>
+                  <td>{{ animal1.LOCAL }}</td>
+                  <td>{{ animal1.FOTO }}</td>
+              </tr>
+          {% endfor %}
+      </tbody>
     </article>
+  </table>
 
-    <article class="cartao-animal">
-      <h2>Zeus</h2>
-      <img src="static/Imagens/Doberman.jpg" alt="Zeus">
-      <p><strong>ID:</strong> 10008</p>
-      <p><strong>Raça:</strong> Dobermann</p>
-      <p><strong>Idade:</strong> 4 anos</p>
-      <p><strong>Local:</strong> Natal - RN</p>
-    </article>
-
-    <article class="cartao-animal">
-      <h2>Garfield</h2>
-      <img src="static/Imagens/gato-laranja-768x461.webp" alt="Garfield">
-      <p><strong>ID:</strong> 10009</p>
-      <p><strong>Raça:</strong> Vira-Lata</p>
-      <p><strong>Idade:</strong> 2 anos</p>
-      <p><strong>Local:</strong> Cambé - PR</p>
-    </article>
-
-    <article class="cartao-animal">
-      <h2>Bolinho</h2>
-      <img src="static/Imagens/hamster-anao-russo.jpg" alt="Bolinho">
-      <p><strong>ID:</strong> 10010</p>
-      <p><strong>Raça:</strong> Anão-Russo</p>
-      <p><strong>Idade:</strong> 1 anos</p>
-      <p><strong>Local:</strong> Ibiporã - PR</p>
-    </article>
-  
-    <article class="cartao-animal">
-      <h2>Simba</h2>
-      <img src="static/Imagens/persa.jpeg" alt="Simba">
-      <p><strong>ID:</strong> 10011</p>
-      <p><strong>Raça:</strong> Persa</p>
-      <p><strong>Idade:</strong> 3 anos</p>
-      <p><strong>Local:</strong> Assaí - PR</p>
-    </article>
-
-    <article class="cartao-animal">
-      <h2>Dracaris</h2>
-      <img src="static/Imagens/Calopsita.jpg" alt="Dracaris">
-      <p><strong>ID:</strong> 10012</p>
-      <p><strong>Raça:</strong> Calopsita</p>
-      <p><strong>Idade:</strong> 4 anos</p>
-      <p><strong>Local:</strong> Curitiba - PR</p>
-    </article>
-
-  </div>
+</div>
 
   <a href="/" class="btn-voltar">← Voltar ao Início</a>
   

@@ -24,7 +24,7 @@ def tabela_clinicas():
 
         cursoIndex = conexaoIndex.cursor(dictionary = True)
 
-        cursoIndex.execute("SELECT * FROM animal1")
+        cursoIndex.execute("SELECT * FROM animal1 WHERE LOCAL = 'clini'")
         #Variável que armazena os dados
         lista_clinicas = cursoIndex.fetchall()
 
@@ -43,7 +43,7 @@ def tabela_petshops():
 
         cursoIndex = conexaoIndex.cursor(dictionary = True)
 
-        cursoIndex.execute("SELECT * FROM animal2")
+        cursoIndex.execute("SELECT * FROM animal1")
         #Variável que armazena os dados
         lista_petshops = cursoIndex.fetchall()
 
@@ -55,10 +55,35 @@ def tabela_petshops():
     except mysql.connector.Error as err:
         return f"Erro ao carregar os animais de petshop: {err}"
 
-@app.route('/cadastro')
-def exibirCad():
-    return render_template('cadastro.html')
+@app.route('/cadastrar', methods=['POST'])
+def criarCad():
+    try:
+        #Recebe os dados do formulário
+        nome = request.form['nome']
+        raca = request.form['raca']
+        idade = request.form['idade']
+        select = request.form['select']
+        foto = request.form['pet_imagem']
 
+        #Criar conexão com o banco de dados
+        conexao = mysql.connector.connect(**bd_config)
+
+        #Levar instruções SQL do Python até o banco de dados
+        curso =  conexao.cursor()
+
+        query = "INSERT INTO animal1 (ANIMAL_ID, NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s,%s)"
+        curso.execute(query,(nome,raca,idade,select,foto))
+
+        #salvar as alteração
+        #fechar o cursor
+        #fechar a conexão com o banco de dados
+        conexao.commit() #conexao
+        curso.close()
+        conexao.close()
+
+        return f"<h3> Animal, {nome} gravado com sucesso! </h3> <a href = '/'> volta </a>"
+    except mysql.connector.Error as err:
+        return f"Erro ao gravar no Banco: {err}"
 
 
 if __name__ == '__main__':
