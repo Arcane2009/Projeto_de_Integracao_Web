@@ -1,8 +1,10 @@
 from flask import Flask, render_template,redirect, url_for, request
 
+
 import mysql.connector
 
 app = Flask(__name__)
+
 
 # Cria conexão com o mySQL
 bd_config = {
@@ -16,6 +18,10 @@ bd_config = {
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/cadastro')
+def exibirCad():
+    return render_template('cadastro.html')
 
 @app.route('/clinica')
 def tabela_clinicas():
@@ -31,7 +37,7 @@ def tabela_clinicas():
         cursoIndex.close()
         conexaoIndex.close()
 
-        return render_template('clinica.html', clinicas = lista_clinicas)
+        return render_template('clinica.html', animais = lista_clinicas)
 
     except mysql.connector.Error as err:
         return f"Erro ao carregar os animais de clínica: {err}"
@@ -50,7 +56,7 @@ def tabela_petshops():
         cursoIndex.close()
         conexaoIndex.close()
 
-        return render_template('petshop.html', petshops = lista_petshops)
+        return render_template('petshop.html', animais = lista_petshops)
 
     except mysql.connector.Error as err:
         return f"Erro ao carregar os animais de petshop: {err}"
@@ -62,8 +68,12 @@ def criarCad():
         nome = request.form['nome']
         raca = request.form['raca']
         idade = request.form['idade']
-        select = request.form['select']
-        foto = request.form['pet_imagem']
+        foto = request.form['pet-imagem']
+        select = request.form['clini_shop']
+  
+        #if request.method == "POST":
+            #select = request.POST.get("clini_shop")
+        
 
         #Criar conexão com o banco de dados
         conexao = mysql.connector.connect(**bd_config)
@@ -71,19 +81,40 @@ def criarCad():
         #Levar instruções SQL do Python até o banco de dados
         curso =  conexao.cursor()
 
-        query = "INSERT INTO animal1 (ANIMAL_ID, NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s,%s)"
+        query = "INSERT INTO animal1 (NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s)"
         curso.execute(query,(nome,raca,idade,select,foto))
 
         #salvar as alteração
         #fechar o cursor
         #fechar a conexão com o banco de dados
+        
         conexao.commit() #conexao
         curso.close()
         conexao.close()
 
-        return f"<h3> Animal, {nome} gravado com sucesso! </h3> <a href = '/'> volta </a>"
+        return f"<h3> Animal, {nome} gravado com sucesso! </h3> <a href = '/'> volta </a>", 
     except mysql.connector.Error as err:
         return f"Erro ao gravar no Banco: {err}"
+    
+@app.route('/excluir/<cpf>')
+def excluir(ID):
+    try:
+        connect_sql = mysql.connector.connect(**bd_config)
+        curso_sql = connect_sql.cursor()
+
+        
+        curso_sql.execute("DELETE FROM animal1 WHERE ANIMAL_ID = %s",(ID))
+        #salvar as alterações
+        connect_sql.commit()
+        #fechar o cursor
+        curso_sql.close()
+        #fechar a conexão com o banco de dados
+        connect_sql.close()
+
+        return redirect(url_for('index'))        
+    
+    except sqlconec.Error as err:
+        return f'Erro ao gravar no Banco: {err}'
 
 
 if __name__ == '__main__':

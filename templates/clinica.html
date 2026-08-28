@@ -13,14 +13,17 @@
   <div class="lista-animais">
     <article class="cartao-animal">
       <tbody class="tabela">
-          {% for animal in animal1 %}
+          {% for animal in animais %}
               <tr>
-                  <td>{{ animal1.ANIMAL_ID }}</td>
-                  <td>{{ animal1.NOME }}</td>
-                  <td>{{ animal1.RACA }}</td>
-                  <td>{{ animal1.IDADE }}</td>
-                  <td>{{ animal1.LOCAL }}</td>
-                  <td>{{ animal1.FOTO }}</td>
+                  <td>{{ animal.ANIMAL_ID }}</td>
+                  <td>{{ animal.NOME }}</td>
+                  <td>{{ animal.RACA }}</td>
+                  <td>{{ animal.IDADE }}</td>
+                  <td>{{ animal.LOCAL }}</td>
+                  <td>{{ animal.FOTO }}</td>
+                  <td>
+                    <a href="{{ url_for('excluir', cpf=cliente.CPF )}}" onclick="return confirm('Confirmar a Exclusão do usuário?')">Excluir</a>
+                </td>
               </tr>
           {% endfor %}
       </tbody>
