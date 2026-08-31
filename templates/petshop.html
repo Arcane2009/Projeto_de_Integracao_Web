@@ -15,14 +15,14 @@
           <tbody class="tabela">
               {% for animal in animais %}
                   <tr>
-                      <td>{{ animal.ANIMAL_ID }}</td>
+                      <td>{{ animal.CPF }}</td>
                       <td>{{ animal.NOME }}</td>
                       <td>{{ animal.RACA }}</td>
                       <td>{{ animal.IDADE }}</td>
                       <td>{{ animal.LOCAL }}</td>
                       <td>{{ animal.FOTO }}</td>
                       <td>
-                        <a href="{{ url_for('excluir', cpf=cliente.CPF )}}" onclick="return confirm('Confirmar a Exclusão do usuário?')">Excluir</a>
+                        <a href="{{ url_for('excluir', cpf=animal.CPF )}}" onclick="return confirm('Confirmar a Exclusão do animal?')">Excluir</a>
                     </td>
                   </tr>
               {% endfor %}

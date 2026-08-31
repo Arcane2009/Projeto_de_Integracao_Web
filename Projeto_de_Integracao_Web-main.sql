@@ -1,12 +1,11 @@
 create database mappet;
 use mappet;
 
-create table if not exists animal1(
-ANIMAL_ID varchar(5) not null primary key,
-NOME varchar(50) not null,
-RACA varchar(20) not null,
-IDADE int not null,
-LOCAL varchar(50) not null
+CREATE TABLE animal1(
+CPF VARCHAR(11) PRIMARY KEY,
+NOME VARCHAR(50) NOT NULL,
+RACA VARCHAR(50) NOT NULL,
+IDADE VARCHAR(20) NOT NULL,
+LOCAL VARCHAR(20) NOT NULL,
+FOTO LONGBLOB
 );
-/*framwork é mais técnico, menos liberdade*/
-select * from cliente1

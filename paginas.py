@@ -49,7 +49,7 @@ def tabela_petshops():
 
         cursoIndex = conexaoIndex.cursor(dictionary = True)
 
-        cursoIndex.execute("SELECT * FROM animal1")
+        cursoIndex.execute("SELECT * FROM animal1 WHERE LOCAL = 'petshop' ")
         #Variável que armazena os dados
         lista_petshops = cursoIndex.fetchall()
 
@@ -65,6 +65,7 @@ def tabela_petshops():
 def criarCad():
     try:
         #Recebe os dados do formulário
+        cpf = request.form['cpf']
         nome = request.form['nome']
         raca = request.form['raca']
         idade = request.form['idade']
@@ -81,8 +82,8 @@ def criarCad():
         #Levar instruções SQL do Python até o banco de dados
         curso =  conexao.cursor()
 
-        query = "INSERT INTO animal1 (NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s)"
-        curso.execute(query,(nome,raca,idade,select,foto))
+        query = "INSERT INTO animal1 (CPF, NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s,%s)"
+        curso.execute(query,(cpf,nome,raca,idade,select,foto))
 
         #salvar as alteração
         #fechar o cursor
@@ -92,18 +93,18 @@ def criarCad():
         curso.close()
         conexao.close()
 
-        return f"<h3> Animal, {nome} gravado com sucesso! </h3> <a href = '/'> volta </a>", 
+        return redirect(url_for('index')) 
     except mysql.connector.Error as err:
         return f"Erro ao gravar no Banco: {err}"
     
 @app.route('/excluir/<cpf>')
-def excluir(ID):
+def excluir(cpf):
     try:
         connect_sql = mysql.connector.connect(**bd_config)
         curso_sql = connect_sql.cursor()
 
         
-        curso_sql.execute("DELETE FROM animal1 WHERE ANIMAL_ID = %s",(ID))
+        curso_sql.execute("DELETE FROM animal1 WHERE CPF = %s",(cpf))
         #salvar as alterações
         connect_sql.commit()
         #fechar o cursor
@@ -113,7 +114,7 @@ def excluir(ID):
 
         return redirect(url_for('index'))        
     
-    except sqlconec.Error as err:
+    except mysql.connector.Error as err:
         return f'Erro ao gravar no Banco: {err}'
 
 
