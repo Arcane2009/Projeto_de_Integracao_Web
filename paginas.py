@@ -104,7 +104,7 @@ def excluir(cpf):
         curso_sql = connect_sql.cursor()
 
         
-        curso_sql.execute("DELETE FROM animal1 WHERE CPF = %s",(cpf))
+        curso_sql.execute("DELETE FROM animal1 WHERE CPF = %s",(cpf,))
         #salvar as alterações
         connect_sql.commit()
         #fechar o cursor
