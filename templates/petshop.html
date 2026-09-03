@@ -12,23 +12,26 @@
 
   <!-- Lista contendo todos os cartões de animais -->
   <div class="lista-animais">
-        <article class="cartao-animal">
-          <tbody class="tabela">
+
+      <table>
+        
+          <tbody class="cartao-animal">
               {% for animal in animais %}
                   <tr>
+                    
                       <td>{{ animal.CPF }}</td>
                       <td>{{ animal.NOME }}</td>
                       <td>{{ animal.RACA }}</td>
                       <td>{{ animal.IDADE }}</td>
                       <td>{{ animal.LOCAL }}</td>
-                      <td>{{ animal.FOTO }}</td>
+                      <td><img src="{{ animal.FOTO }}" class="cartao-img"></td>
                       <td>
                         <a href="{{ url_for('excluir', cpf=animal.CPF )}}" onclick="return confirm('Confirmar a Exclusão do animal?')">Excluir</a>
                     </td>
                   </tr>
               {% endfor %}
           </tbody>
-        </article>
+        
       </table>
 
   </div>
