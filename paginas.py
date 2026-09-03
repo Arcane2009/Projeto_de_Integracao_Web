@@ -1,7 +1,6 @@
 from flask import Flask, render_template,redirect, url_for, request
-
-
 import mysql.connector
+import base64
 
 app = Flask(__name__)
 
@@ -34,6 +33,11 @@ def tabela_clinicas():
         #Variável que armazena os dados
         lista_clinicas = cursoIndex.fetchall()
 
+        for animal in lista_clinicas:
+            if animal['FOTO']:  # Verifica se existe algo na coluna FOTO
+                # Converte os bytes para uma string base64
+                animal['FOTO'] = base64.b64encode(animal['FOTO']).decode('utf-8')
+
         cursoIndex.close()
         conexaoIndex.close()
 
@@ -52,6 +56,11 @@ def tabela_petshops():
         cursoIndex.execute("SELECT * FROM animal1 WHERE LOCAL = 'petshop' ")
         #Variável que armazena os dados
         lista_petshops = cursoIndex.fetchall()
+
+        for animal in lista_petshops:
+            if animal['FOTO']:  # Verifica se existe algo na coluna FOTO
+                # Converte os bytes para uma string base64
+                animal['FOTO'] = base64.b64encode(animal['FOTO']).decode('utf-8')
 
         cursoIndex.close()
         conexaoIndex.close()

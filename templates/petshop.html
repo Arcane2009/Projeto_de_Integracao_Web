@@ -15,22 +15,27 @@
 
       <table>
         
-          <tbody class="cartao-animal">
-              {% for animal in animais %}
-                  <tr>
-                    
-                      <td>{{ animal.CPF }}</td>
-                      <td>{{ animal.NOME }}</td>
-                      <td>{{ animal.RACA }}</td>
-                      <td>{{ animal.IDADE }}</td>
-                      <td>{{ animal.LOCAL }}</td>
-                      <td><img src="{{ animal.FOTO }}" class="cartao-img"></td>
-                      <td>
-                        <a href="{{ url_for('excluir', cpf=animal.CPF )}}" onclick="return confirm('Confirmar a Exclusão do animal?')">Excluir</a>
-                    </td>
-                  </tr>
-              {% endfor %}
-          </tbody>
+        <tbody class="cartao-animal">
+          {% for animal in animais %}
+          <tr>
+              <td>
+                  {% if animal.FOTO %}
+                      <!-- Renderiza a imagem diretamente do Base64 -->
+                      <img src="data:image/webp;base64,{{ animal.FOTO }}" alt="Foto de {{ animal.NOME }}" width="100">
+                  {% else %}
+                      <span>Sem foto</span>
+                  {% endif %}
+              </td>
+              <td>{{ animal.NOME }}</td>
+              <td>{{ animal.RACA }}</td>
+              <td>{{ animal.IDADE }}</td>
+              <td>
+                  <!-- Link para excluir passando o CPF -->
+                  <a href="{{ url_for('excluir', cpf=animal.CPF) }}">Excluir</a>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
         
       </table>
 
