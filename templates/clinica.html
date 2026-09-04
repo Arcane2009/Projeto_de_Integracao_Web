@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
   <link rel="stylesheet" href="static/style.css">
   <title>Perfil dos Animais</title>
 </head>
@@ -14,21 +15,27 @@
   <!-- Lista contendo todos os cartões de animais -->
   <div class="lista-animais">
     <article class="cartao-animal">
-      <tbody class="tabela">
-          {% for animal in animais %}
-              <tr>
-                  <td>{{ animal.CPF }}</td>
-                  <td>{{ animal.NOME }}</td>
-                  <td>{{ animal.RACA }}</td>
-                  <td>{{ animal.IDADE }}</td>
-                  <td>{{ animal.LOCAL }}</td>
-                  <td>{{ animal.FOTO }}</td>
-                  <td>
-                    <a href="{{ url_for('excluir', cpf=animal.CPF )}}" onclick="return confirm('Confirmar a Exclusão do animal?')">Excluir</a>
-                </td>
-              </tr>
-          {% endfor %}
-      </tbody>
+      <tbody class="cartao-animal">
+        {% for animal in animais %}
+        <tr>
+            <td>
+                {% if animal.FOTO %}
+                    <!-- Renderiza a imagem diretamente do Base64 -->
+                    <img src="{{ animal.FOTO }}" alt="Foto de {{ animal.NOME }}" width="100">
+                {% else %}
+                    <span>Sem foto</span>
+                {% endif %}
+            </td>
+            <td>{{ animal.NOME }}</td>
+            <td>{{ animal.RACA }}</td>
+            <td>{{ animal.IDADE }}</td>
+            <td>
+                <!-- Link para excluir passando o CPF -->
+                <a href="{{ url_for('excluir', cpf=animal.CPF) }}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
     </article>
   </table>
 

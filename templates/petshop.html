@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
   <link rel="stylesheet" href="static/style.css">
   <title>Perfil dos Animais</title>
 </head>
@@ -21,7 +22,7 @@
               <td>
                   {% if animal.FOTO %}
                       <!-- Renderiza a imagem diretamente do Base64 -->
-                      <img src="data:image/webp;base64,{{ animal.FOTO }}" alt="Foto de {{ animal.NOME }}" width="100">
+                      <img src="{{ animal.FOTO }}" alt="Foto de {{ animal.NOME }}" width="100">
                   {% else %}
                       <span>Sem foto</span>
                   {% endif %}

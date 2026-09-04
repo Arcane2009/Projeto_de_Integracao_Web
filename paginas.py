@@ -34,9 +34,9 @@ def tabela_clinicas():
         lista_clinicas = cursoIndex.fetchall()
 
         for animal in lista_clinicas:
-            if animal['FOTO']:  # Verifica se existe algo na coluna FOTO
-                # Converte os bytes para uma string base64
-                animal['FOTO'] = base64.b64encode(animal['FOTO']).decode('utf-8')
+            if animal['FOTO']:
+                # Mantém a URL diretamente para uso no front-end
+                animal['FOTO'] = str(animal['FOTO']).strip()
 
         cursoIndex.close()
         conexaoIndex.close()
@@ -58,9 +58,9 @@ def tabela_petshops():
         lista_petshops = cursoIndex.fetchall()
 
         for animal in lista_petshops:
-            if animal['FOTO']:  # Verifica se existe algo na coluna FOTO
-                # Converte os bytes para uma string base64
-                animal['FOTO'] = base64.b64encode(animal['FOTO']).decode('utf-8')
+            if animal['FOTO']:
+                # Mantém a URL diretamente para uso no front-end
+                animal['FOTO'] = str(animal['FOTO']).strip()
 
         cursoIndex.close()
         conexaoIndex.close()
@@ -78,7 +78,7 @@ def criarCad():
         nome = request.form['nome']
         raca = request.form['raca']
         idade = request.form['idade']
-        foto = request.form['pet-imagem']
+        foto = request.form.get('pet-imagem')
         select = request.form['clini_shop']
   
         #if request.method == "POST":
