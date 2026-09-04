@@ -1,233 +1,193 @@
-/* Reset Básico e Fontes Globais */
+/* ==========================================================================
+   MapPet - Style Perfil dos Animais (Clínicas e Petshops)
+   ========================================================================== */
+
+/* Reset básico e tipografia */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  body {
-    background-color: #f4f6f9;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    padding: 30px 20px;
-  }
-  
-  /* Títulos Globais */
-  h1 {
-    color: #2c3e50;
-    margin-bottom: 25px;
-    text-align: center;
-  }
-  
-  /* Contêiner de Cartão Centralizado (pag1.css / cada.css) */
-  .page-card {
-    background: #ffffff;
-    padding: 35px 25px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    max-width: 420px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  /* Elementos da Página Inicial (pag1.css) */
-  .logo {
-    max-width: 180px;
-    height: auto;
-    margin-bottom: 25px;
-  }
-  
-  .button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    align-items: center;
-  }
-  
-  .btn-link {
-    display: block;
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .btn-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .btn-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 12px;
-  }
-  
-  .btn-cadastrar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: 14px 20px;
-    background-color: #27ae60;
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 12px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-  }
-  
-  .btn-cadastrar:hover {
-    background-color: #219150;
-    transform: translateY(-2px);
-  }
-  
-  .icon-plus {
-    width: 20px;
-    height: 20px;
-  }
-  
-  /* Formulário de Cadastro (cada.css) */
-  .page-title {
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-    color: #2c3e50;
-  }
-  
-  .form-cadastro {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-  }
-  
-  .input-group label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #555;
-  }
-  
-  .input-group input {
-    padding: 12px 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
-  
-  .input-group input:focus {
-    border-color: #27ae60;
-  }
-  
-  .meu-select {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  color: #333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-  .btn-salvar {
-    width: 100%;
-    padding: 12px;
-    background-color: #27ae60;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .btn-salvar:hover {
-    background-color: #219150;
-  }
-  
-  .btn-voltar {
-    display: inline-block;
-    margin-top: 20px;
-    color: #7f8c8d;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.2s ease;
-  }
-  
-  .btn-voltar:hover {
-    color: #2c3e50;
-  }
-  
-  /* Grid e Cartões de Pets (style_pet_clin.css) */
-  .lista-animais {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1100px;
-    margin-top: 10px;
-  }
-  
-  .cartao-animal {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .cartao-animal:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  }
-  
-  .cartao-animal h2 {
-    font-size: 1.25rem;
-    color: #2c3e50;
-    margin-bottom: 12px;
-  }
-  
-  .cartao_img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 12px;
-  }
-  
-  .cartao-animal p {
-    width: 100%;
-    text-align: left;
-    font-size: 0.9rem;
-    color: #555;
-    margin: 3px 0;
-  }
-  
-  .cartao-animal p strong {
-    color: #2c3e50;
-  }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  padding: 30px 20px;
+}
+
+/* Logo centralizada no topo */
+.logo {
+  display: block;
+  margin: 10px auto 20px auto;
+  max-width: 120px;
+  height: auto;
+}
+
+/* Título principal */
+h1 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 35px;
+}
+
+/* Container principal da lista de animais */
+.lista-animais {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Transforma as tags HTML de tabela e lista em um Grid Flexível */
+.lista-animais table,
+.lista-animais article,
+.lista-animais tbody,
+tbody.cartao-animal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Cartão do Animal (cada linha <tr> vira um cartão cinza arredondado) */
+.lista-animais tr,
+tbody.cartao-animal tr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #ececec;
+  border-radius: 18px;
+  padding: 16px;
+  width: 260px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lista-animais tr:hover,
+tbody.cartao-animal tr:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Reset das células da tabela (<td>) */
+.lista-animais td,
+tbody.cartao-animal td {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  text-align: center;
+}
+
+/* 1. Foto do Animal */
+.lista-animais td:nth-child(1),
+tbody.cartao-animal td:nth-child(1) {
+  width: 100%;
+  height: 160px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.lista-animais td:nth-child(1) img,
+tbody.cartao-animal td:nth-child(1) img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.lista-animais td:nth-child(1) span,
+tbody.cartao-animal td:nth-child(1) span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #d0d0d0;
+  color: #555555;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 2. Nome do Animal */
+.lista-animais td:nth-child(2),
+tbody.cartao-animal td:nth-child(2) {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 2px;
+}
+
+/* 3. Raça do Animal */
+.lista-animais td:nth-child(3),
+tbody.cartao-animal td:nth-child(3) {
+  font-size: 14px;
+  font-weight: 500;
+  color: #999999;
+  margin-bottom: 6px;
+}
+
+/* 4. Idade do Animal */
+.lista-animais td:nth-child(4),
+tbody.cartao-animal td:nth-child(4) {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+/* 5. Botão de Excluir */
+.lista-animais td:nth-child(5),
+tbody.cartao-animal td:nth-child(5) {
+  width: 100%;
+  margin-top: auto;
+}
+
+.lista-animais td:nth-child(5) a,
+tbody.cartao-animal td:nth-child(5) a {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #ff3b30;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 25px;
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 6px rgba(255, 59, 48, 0.25);
+}
+
+.lista-animais td:nth-child(5) a:hover,
+tbody.cartao-animal td:nth-child(5) a:hover {
+  background-color: #e03126;
+}
+
+/* Botão "Voltar ao Início" */
+.btn-voltar {
+  display: table;
+  margin: 40px auto 20px auto;
+  padding: 10px 20px;
+  color: #666666;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #e5e5e5;
+  color: #000000;
+}
