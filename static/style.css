@@ -16,6 +16,180 @@ body {
   padding: 30px 20px;
 }
 
+/* ==========================================================================
+   1. RESETS E ESTILOS GERAIS
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #ffffff;
+  color: #111111;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 20px;
+}
+
+/* Logo Superior Centrada */
+.logo {
+  max-width: 110px;
+  height: auto;
+  margin-bottom: 12px;
+  display: block;
+}
+
+h1 {
+  color: #000000;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   2. CARDS E CONTAINERS (index.html e cadastro.html)
+   ========================================================================== */
+.page-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  color: #111111;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   3. BOTÕES DO INDEX (index.html)
+   ========================================================================== */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.btn-link {
+  display: block;
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.btn-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.btn-cadastrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #27ae60;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.25);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-cadastrar:hover {
+  background-color: #219150;
+  transform: translateY(-2px);
+}
+
+.icon-plus {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================================================
+   4. FORMULÁRIO (cadastro.html)
+   ========================================================================== */
+.form-cadastro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444444;
+}
+
+.input-group input,
+.meu-select {
+  padding: 12px;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+
+.input-group input:focus,
+.meu-select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.btn-salvar {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-salvar:hover {
+  background-color: #2980b9;
+}
+
+/* ==========================================================================
+   5. CARTÕES DOS ANIMAIS (Fidelidade ao protótipo da imagem)
+   ========================================================================== */
 /* Logo centralizada no topo */
 .logo {
   display: block;
@@ -166,6 +340,28 @@ tbody.cartao-animal td:nth-child(5) a {
   text-align: center;
   transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 2px 6px rgba(255, 59, 48, 0.25);
+}:nth-child(5) a:hover,
+tbody.cartao-animal td:nth-child(5) a:hover {
+  background-color: #e03126;
+}
+
+/* Botão "Voltar ao Início" */
+.btn-voltar {
+  display: table;
+  margin: 40px auto 20px auto;
+  padding: 10px 20px;
+  color: #666666;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #e5e5e5;
+  color: #000000;
 }
 
 .lista-animais td:nth-child(5) a:hover,
@@ -189,5 +385,21 @@ tbody.cartao-animal td:nth-child(5) a:hover {
 
 .btn-voltar:hover {
   background-color: #e5e5e5;
+  color: #000000;
+}
+
+/* ==========================================================================
+   6. BOTÃO DE VOLTAR
+   ========================================================================== */
+.btn-voltar {
+  margin-top: 15px;
+  color: #666666;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.btn-voltar:hover {
   color: #000000;
 }
