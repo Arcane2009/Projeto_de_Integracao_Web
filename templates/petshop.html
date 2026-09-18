@@ -31,8 +31,9 @@
               <td>{{ animal.RACA }}</td>
               <td>{{ animal.IDADE }}</td>
               <td>
-                  <!-- Link para excluir passando o CPF -->
-                  <a href="{{ url_for('excluir', cpf=animal.CPF) }}">Excluir</a>
+                <a class="badotar" href="https://www.google.com/maps/place/Bich%C3%ADneos+Pet+Shop/@-23.3140476,-51.1964834,17.91z/data=!4m6!3m5!1s0x94eb5b5cc047003d:0x71fffdeb368fc772!8m2!3d-23.3137834!4d-51.1964824!16s%2Fg%2F11bzvzxf_k?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D">Adotar</a>
+                <!-- Link para excluir passando o CPF -->
+                <a class="bexcluir" href="{{ url_for('excluir', cpf=animal.CPF) }}">Excluir</a>
               </td>
           </tr>
           {% endfor %}
