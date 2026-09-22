@@ -18,6 +18,10 @@ bd_config = {
 def index():
     return render_template('index.html')
 
+@app.route('/login')
+def logar():
+    return render_template('login.html')
+
 @app.route('/cadastro')
 def exibirCad():
     return render_template('cadastro.html')
@@ -70,7 +74,42 @@ def tabela_petshops():
     except mysql.connector.Error as err:
         return f"Erro ao carregar os animais de petshop: {err}"
 
-@app.route('/cadastrar', methods=['POST'])
+@app.route('/cadastrar_animal', methods=['POST'])
+def criarCad():
+    try:
+        #Recebe os dados do formulário
+        nome = request.form['nome']
+        raca = request.form['raca']
+        idade = request.form['idade']
+        foto = request.form.get('pet-imagem')
+        select = request.form['clini_shop']
+  
+        #if request.method == "POST":
+            #select = request.POST.get("clini_shop")
+        
+
+        #Criar conexão com o banco de dados
+        conexao = mysql.connector.connect(**bd_config)
+
+        #Levar instruções SQL do Python até o banco de dados
+        curso =  conexao.cursor()
+
+        query = "INSERT INTO animal1 (NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s)"
+        curso.execute(query,(nome,raca,idade,select,foto))
+
+        #salvar as alteração
+        #fechar o cursor
+        #fechar a conexão com o banco de dados
+        
+        conexao.commit() #conexao
+        curso.close()
+        conexao.close()
+
+        return redirect(url_for('index')) 
+    except mysql.connector.Error as err:
+        return f"Erro ao gravar no Banco: {err}"
+
+@app.route('/cadastrar_usuario', methods=['POST'])
 def criarCad():
     try:
         #Recebe os dados do formulário
@@ -91,8 +130,8 @@ def criarCad():
         #Levar instruções SQL do Python até o banco de dados
         curso =  conexao.cursor()
 
-        query = "INSERT INTO animal1 (CPF, NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s,%s)"
-        curso.execute(query,(cpf,nome,raca,idade,select,foto))
+        query = "INSERT INTO animal1 (CPF) VALUES (%s)"
+        curso.execute(query,(cpf))
 
         #salvar as alteração
         #fechar o cursor
@@ -102,10 +141,10 @@ def criarCad():
         curso.close()
         conexao.close()
 
-        return redirect(url_for('index')) 
+        return redirect(url_for('index')) and cpf 
     except mysql.connector.Error as err:
         return f"Erro ao gravar no Banco: {err}"
-    
+        
 @app.route('/excluir/<cpf>')
 def excluir(cpf):
     try:
