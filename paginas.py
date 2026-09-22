@@ -114,11 +114,9 @@ def criarCad():
     try:
         #Recebe os dados do formulário
         cpf = request.form['cpf']
-        nome = request.form['nome']
-        raca = request.form['raca']
-        idade = request.form['idade']
-        foto = request.form.get('pet-imagem')
-        select = request.form['clini_shop']
+        nome = request.form['nome_cliente']
+        idade = request.form['idade_cliente']
+
   
         #if request.method == "POST":
             #select = request.POST.get("clini_shop")
