@@ -110,12 +110,12 @@ def criarCad():
         return f"Erro ao gravar no Banco: {err}"
 
 @app.route('/cadastrar_usuario', methods=['POST'])
-def criarCad():
+def criarCadUser():
     try:
         #Recebe os dados do formulário
         cpf = request.form['cpf']
-        nome = request.form['nome_cliente']
-        idade = request.form['idade_cliente']
+        nome_user = request.form['nome_cliente']
+        idade_user = request.form['idade_cliente']
         telefone = request.form['telefone']
 
         #if request.method == "POST":
@@ -127,11 +127,8 @@ def criarCad():
         #Levar instruções SQL do Python até o banco de dados
         curso =  conexao.cursor()
 
-        query = "INSERT INTO animal1 (CPF) VALUES (%s)"
-        curso.execute(query,(cpf))
-
-        query = "INSERT INTO cliente1 (CPF, NOME, IDADE, TELEFONE) VALUES (%s, %s, %s, %s)"
-        curso.execute(query,(cpf, nome, idade, telefone))
+        query = "INSERT INTO cliente1 (CPF, NOME_USER, IDADE_USER, TELEFONE) VALUES (%s, %s, %s, %s)"
+        curso.execute(query,(cpf, nome_user, idade_user, telefone))
         #salvar as alteração
         #fechar o cursor
         #fechar a conexão com o banco de dados
@@ -140,7 +137,7 @@ def criarCad():
         curso.close()
         conexao.close()
 
-        return redirect(url_for('index')) and cpf 
+        return redirect(url_for('index'))
     except mysql.connector.Error as err:
         return f"Erro ao gravar no Banco: {err}"
         
