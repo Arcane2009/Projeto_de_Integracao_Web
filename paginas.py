@@ -116,12 +116,11 @@ def criarCad():
         cpf = request.form['cpf']
         nome = request.form['nome_cliente']
         idade = request.form['idade_cliente']
+        telefone = request.form['telefone']
 
-  
         #if request.method == "POST":
             #select = request.POST.get("clini_shop")
         
-
         #Criar conexão com o banco de dados
         conexao = mysql.connector.connect(**bd_config)
 
@@ -131,6 +130,8 @@ def criarCad():
         query = "INSERT INTO animal1 (CPF) VALUES (%s)"
         curso.execute(query,(cpf))
 
+        query = "INSERT INTO cliente1 (CPF, NOME, IDADE, TELEFONE) VALUES (%s, %s, %s, %s)"
+        curso.execute(query,(cpf, nome, idade, telefone))
         #salvar as alteração
         #fechar o cursor
         #fechar a conexão com o banco de dados
