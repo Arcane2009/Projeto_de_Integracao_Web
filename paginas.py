@@ -1,6 +1,5 @@
 from flask import Flask, render_template,redirect, url_for, request
 import mysql.connector
-import base64
 
 app = Flask(__name__)
 
@@ -13,6 +12,8 @@ bd_config = {
     'database': 'mappet',
     'ssl_disabled': True
 }
+
+senha_admin = "pipoca"
 
 @app.route('/')
 def index():
@@ -30,54 +31,55 @@ def exibirCad():
 def tabela_clinicas():
     try:
         conexaoIndex = mysql.connector.connect(**bd_config)
-
-        cursoIndex = conexaoIndex.cursor(dictionary = True)
+        cursoIndex = conexaoIndex.cursor(dictionary=True)
 
         cursoIndex.execute("SELECT * FROM animal1 WHERE LOCAL = 'clini'")
-        #Variável que armazena os dados
         lista_clinicas = cursoIndex.fetchall()
 
         for animal in lista_clinicas:
-            if animal['FOTO']:
-                # Mantém a URL diretamente para uso no front-end
-                animal['FOTO'] = str(animal['FOTO']).strip()
+            if animal["FOTO"]:
+                animal["FOTO"] = str(animal["FOTO"]).strip()
 
         cursoIndex.close()
         conexaoIndex.close()
 
-        return render_template('clinica.html', animais = lista_clinicas)
+        # Envia a variável 'admin' diretamente para o template HTML
+        return render_template(
+            "clinica.html", animais=lista_clinicas, admin=admin
+        )
 
     except mysql.connector.Error as err:
         return f"Erro ao carregar os animais de clínica: {err}"
-
+    
 @app.route('/petshop')
 def tabela_petshops():
     try:
         conexaoIndex = mysql.connector.connect(**bd_config)
+        cursoIndex = conexaoIndex.cursor(dictionary=True)
 
-        cursoIndex = conexaoIndex.cursor(dictionary = True)
+        cursoIndex.execute("SELECT * FROM animal1 WHERE LOCAL = 'petshop'")
+        lista_clinicas = cursoIndex.fetchall()
 
-        cursoIndex.execute("SELECT * FROM animal1 WHERE LOCAL = 'petshop' ")
-        #Variável que armazena os dados
-        lista_petshops = cursoIndex.fetchall()
-
-        for animal in lista_petshops:
-            if animal['FOTO']:
-                # Mantém a URL diretamente para uso no front-end
-                animal['FOTO'] = str(animal['FOTO']).strip()
+        for animal in lista_clinicas:
+            if animal["FOTO"]:
+                animal["FOTO"] = str(animal["FOTO"]).strip()
 
         cursoIndex.close()
         conexaoIndex.close()
 
-        return render_template('petshop.html', animais = lista_petshops)
+        # Envia a variável 'admin' diretamente para o template HTML
+        return render_template(
+            "clinica.html", animais=lista_clinicas, admin=admin
+        )
 
     except mysql.connector.Error as err:
-        return f"Erro ao carregar os animais de petshop: {err}"
+        return f"Erro ao carregar os animais de clínica: {err}"
 
 @app.route('/cadastrar_animal', methods=['POST'])
 def criarCad():
     try:
         #Recebe os dados do formulário
+        cpf = request.form['cpf']
         nome = request.form['nome']
         raca = request.form['raca']
         idade = request.form['idade']
@@ -94,8 +96,8 @@ def criarCad():
         #Levar instruções SQL do Python até o banco de dados
         curso =  conexao.cursor()
 
-        query = "INSERT INTO animal1 (NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s)"
-        curso.execute(query,(nome,raca,idade,select,foto))
+        query = "INSERT INTO animal1 (CPF, NOME, RACA, IDADE, LOCAL, FOTO) VALUES (%s,%s,%s,%s,%s,%s)"
+        curso.execute(query,(cpf,nome,raca,idade,select,foto))
 
         #salvar as alteração
         #fechar o cursor
@@ -111,33 +113,33 @@ def criarCad():
 
 @app.route('/cadastrar_usuario', methods=['POST'])
 def criarCadUser():
+    global admin  # Permite alterar a variável global 'admin' declarada no topo do código
+
     try:
-        #Recebe os dados do formulário
-        cpf = request.form['cpf']
-        nome_user = request.form['nome_cliente']
-        idade_user = request.form['idade_cliente']
-        telefone = request.form['telefone']
+        cpf = request.form["cpf_cliente"]
+        nome_user = request.form["nome_cliente"]
+        idade_user = request.form["idade_cliente"]
+        telefone = request.form["telefone"]
+        senha = request.form["senha"]
 
-        #if request.method == "POST":
-            #select = request.POST.get("clini_shop")
-        
-        #Criar conexão com o banco de dados
         conexao = mysql.connector.connect(**bd_config)
+        curso = conexao.cursor()
 
-        #Levar instruções SQL do Python até o banco de dados
-        curso =  conexao.cursor()
+        query = "INSERT INTO cliente1 (CPF_USER, NOME_USER, IDADE_USER, TELEFONE) VALUES (%s, %s, %s, %s)"
+        curso.execute(query, (cpf, nome_user, idade_user, telefone))
 
-        query = "INSERT INTO cliente1 (CPF, NOME_USER, IDADE_USER, TELEFONE) VALUES (%s, %s, %s, %s)"
-        curso.execute(query,(cpf, nome_user, idade_user, telefone))
-        #salvar as alteração
-        #fechar o cursor
-        #fechar a conexão com o banco de dados
-        
-        conexao.commit() #conexao
+        conexao.commit()
         curso.close()
         conexao.close()
 
-        return redirect(url_for('index'))
+        # Altera o estado do admin
+        if senha == senha_admin:
+            admin = True
+        else:
+            admin = False
+
+        return redirect(url_for("index"))
+
     except mysql.connector.Error as err:
         return f"Erro ao gravar no Banco: {err}"
         
