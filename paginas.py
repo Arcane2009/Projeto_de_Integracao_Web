@@ -17,14 +17,15 @@ login_status = 0
 
 @app.route("/")
 def index():
-    mensagens = {
-        0: "Acesso restrito: você não está logado.",
-        1: "Bem-vindo! Você está conectado como Usuário Comum.",
-        2: "Bem-vindo! Você está conectado como Administrador.",
-    }
+    if login_status == 0: 
+        mensagens = "Acesso restrito: você não está logado."
+    elif login_status == 1:
+        mensagens = "Bem-vindo! Você está conectado como Usuário Comum."
+    else:
+        mensagens = "Bem-vindo! Você está conectado como Administrador."
 
     # Obtém a mensagem correspondente ao código de login
-    texto_paragrafo = mensagens.get(login_status, "Status inválido.")
+    texto_paragrafo = mensagens
 
     return render_template("index.html", mensagem = texto_paragrafo)
 
