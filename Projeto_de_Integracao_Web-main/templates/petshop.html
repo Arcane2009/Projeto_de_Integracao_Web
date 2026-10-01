@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <link rel="stylesheet" href="static/style.css">
+  <title>Perfil dos Animais</title>
+</head>
+<body>
+  <img src="static/Imagens/logo.png" alt="Logo MapPet" class="logo">
+
+  <h1>Perfil dos Animais em Pet Shops</h1>
+
+  <!-- Lista contendo todos os cartões de animais -->
+  <div class="lista-animais">
+
+      <table>
+        
+        <tbody class="cartao-animal">
+          {% for animal in animais %}
+          <tr>
+              <td>
+                  {% if animal.FOTO %}
+                      <!-- Renderiza a imagem diretamente do Base64 -->
+                      <img src="{{ animal.FOTO }}" alt="Foto de {{ animal.NOME }}" width="100">
+                  {% else %}
+                      <span>Sem foto</span>
+                  {% endif %}
+              </td>
+              <td>{{ animal.NOME }}</td>
+              <td>{{ animal.RACA }}</td>
+              <td>{{ animal.IDADE }}</td>
+              <td>
+                <a class="badotar" href="https://www.google.com/maps/place/Bich%C3%ADneos+Pet+Shop/@-23.3140476,-51.1964834,17.91z/data=!4m6!3m5!1s0x94eb5b5cc047003d:0x71fffdeb368fc772!8m2!3d-23.3137834!4d-51.1964824!16s%2Fg%2F11bzvzxf_k?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D">Adotar</a>
+              </td>
+              <td>
+                {% if admin %}
+                    <!-- Link para excluir passando o CPF -->
+                    <a class="bexcluir" href="{{ url_for('excluir', cpf=animal.CPF) }}">Excluir</a>
+                {% endif %}
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+        
+      </table>
+
+  </div>
+
+  <a href="/" class="btn-voltar">← Voltar ao Início</a>
+
+</body>
+</html>

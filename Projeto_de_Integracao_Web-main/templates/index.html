@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MapPet</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+
+  <img src="static/Imagens/logo_principal.png" alt="Logo MapPet Principal" class="logo">
+
+  <div class="page-card">
+    
+    <div class="button-group">
+      <!-- Link para Pets de Clínica -->
+      <a href="/clinica" class="btn-link">
+        <img src="static/Imagens/clinica.png" alt="Ver Pets de Clínica" class="btn-img">
+      </a>
+      
+      <!-- Link para Pets de Pet Shop -->
+      <a href="/petshop" class="btn-link">
+        <img src="static/Imagens/shop.png" alt="Ver Pets de Pet Shop" class="btn-img">
+      </a>
+      
+      <!-- Link para Cadastrar Animal -->
+      <a href="/cadastro" class="btn-cadastrar">
+        <span>Cadastrar o Animal</span>
+        <svg class="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </a>
+
+      <a href="/login" class="btn-cadastrar">Cadastrar/Logar usuário</a>
+
+      <p class="mensagemLogin">{{ mensagem }}</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
