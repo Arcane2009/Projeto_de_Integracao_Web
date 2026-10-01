@@ -3,7 +3,6 @@ import mysql.connector
 
 app = Flask(__name__)
 
-
 # Cria conexão com o mySQL
 bd_config = {
     'host': '127.0.0.1',
@@ -14,10 +13,20 @@ bd_config = {
 }
 
 senha_admin = "pipoca"
+login_status = 0
 
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    mensagens = {
+        0: "Acesso restrito: você não está logado.",
+        1: "Bem-vindo! Você está conectado como Usuário Comum.",
+        2: "Bem-vindo! Você está conectado como Administrador.",
+    }
+
+    # Obtém a mensagem correspondente ao código de login
+    texto_paragrafo = mensagens.get(login_status, "Status inválido.")
+
+    return render_template("index.html", mensagem = texto_paragrafo)
 
 @app.route('/login')
 def logar():
@@ -113,8 +122,9 @@ def criarCad():
 
 @app.route('/cadastrar_usuario', methods=['POST'])
 def criarCadUser():
-    global admin  # Permite alterar a variável global 'admin' declarada no topo do código
-
+    global admin # Permite alterar a variável global 'admin' declarada no topo do código
+    global login
+    
     try:
         cpf = request.form["cpf_cliente"]
         nome_user = request.form["nome_cliente"]
@@ -135,8 +145,10 @@ def criarCadUser():
         # Altera o estado do admin
         if senha == senha_admin:
             admin = True
+            login = 1
         else:
             admin = False
+            login = 2
 
         return redirect(url_for("index"))
 
@@ -149,7 +161,6 @@ def excluir(cpf):
         connect_sql = mysql.connector.connect(**bd_config)
         curso_sql = connect_sql.cursor()
 
-        
         curso_sql.execute("DELETE FROM animal1 WHERE CPF = %s",(cpf,))
         #salvar as alterações
         connect_sql.commit()
@@ -162,7 +173,6 @@ def excluir(cpf):
     
     except mysql.connector.Error as err:
         return f'Erro ao gravar no Banco: {err}'
-
 
 if __name__ == '__main__':
     app.run(debug = True)
