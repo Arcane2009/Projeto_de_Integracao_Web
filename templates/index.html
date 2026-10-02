@@ -32,7 +32,13 @@
         </svg>
       </a>
 
+      {% if login_status == 0 %}
       <a href="/login" class="btn-cadastrar">Cadastrar/Logar usuário</a>
+      {% endif %}
+
+      {% if login_status == 1 or login_status == 2 %}
+      <a href="/login" class="btn-cadastrar">Deslogar usuário</a>
+      {% endif %}
 
       <p class="mensagemLogin">{{ mensagem }}</p>
     </div>

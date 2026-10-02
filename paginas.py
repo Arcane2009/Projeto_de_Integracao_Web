@@ -17,17 +17,18 @@ login_status = 0
 
 @app.route("/")
 def index():
-    if login_status == 0: 
-        mensagens = "Acesso restrito: você não está logado."
-    elif login_status == 1:
+
+    if login_status == 1:
         mensagens = "Bem-vindo! Você está conectado como Usuário Comum."
-    else:
+    elif login_status == 2:
         mensagens = "Bem-vindo! Você está conectado como Administrador."
+    else:
+        mensagens = "Bem Vindo! Você não está conectado"
 
     # Obtém a mensagem correspondente ao código de login
     texto_paragrafo = mensagens
 
-    return render_template("index.html", mensagem = texto_paragrafo)
+    return render_template("index.html", mensagem = texto_paragrafo, login_status = login_status)
 
 @app.route('/login')
 def logar():
@@ -79,7 +80,7 @@ def tabela_petshops():
 
         # Envia a variável 'admin' diretamente para o template HTML
         return render_template(
-            "clinica.html", animais=lista_clinicas, admin=admin
+            "petshop.html", animais=lista_clinicas, admin=admin
         )
 
     except mysql.connector.Error as err:
@@ -124,7 +125,7 @@ def criarCad():
 @app.route('/cadastrar_usuario', methods=['POST'])
 def criarCadUser():
     global admin # Permite alterar a variável global 'admin' declarada no topo do código
-    global login
+    global login_status
     
     try:
         cpf = request.form["cpf_cliente"]
@@ -146,10 +147,10 @@ def criarCadUser():
         # Altera o estado do admin
         if senha == senha_admin:
             admin = True
-            login = 1
+            login_status = 2
         else:
             admin = False
-            login = 2
+            login_status = 1
 
         return redirect(url_for("index"))
 
