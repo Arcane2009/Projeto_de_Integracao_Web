@@ -34,9 +34,13 @@ def index():
 def logar():
     return render_template('login.html')
 
+@app.route('/cadastrar-cliente')
+def cadastrar():
+    return render_template('cadastrar-cliente.html')
+
 @app.route('/cadastro')
 def exibirCad():
-    return render_template('cadastro.html')
+    return render_template('cadastro-animal.html')
 
 @app.route('/clinica')
 def tabela_clinicas():
@@ -137,8 +141,8 @@ def criarCadUser():
         conexao = mysql.connector.connect(**bd_config)
         curso = conexao.cursor()
 
-        query = "INSERT INTO cliente1 (CPF_USER, NOME_USER, IDADE_USER, TELEFONE) VALUES (%s, %s, %s, %s)"
-        curso.execute(query, (cpf, nome_user, idade_user, telefone))
+        query = "INSERT INTO cliente1 (CPF_USER, NOME_USER, IDADE_USER, TELEFONE, SENHA_USER) VALUES (%s, %s, %s, %s, %s)"
+        curso.execute(query, (cpf, nome_user, idade_user, telefone, senha))
 
         conexao.commit()
         curso.close()
@@ -156,6 +160,39 @@ def criarCadUser():
 
     except mysql.connector.Error as err:
         return f"Erro ao gravar no Banco: {err}"
+    
+
+@app.route('/logar_usuario', methods=['POST'])
+def LogarUser(cpf,senha):
+    global admin # Permite alterar a variável global 'admin' declarada no topo do código
+    global login_status
+    
+    try:
+
+        conexao = mysql.connector.connect(**bd_config)
+        curso = conexao.cursor()
+
+        query = "SELECT * FROM cliente1 WHERE CPF_USER = '%s' AND SENHA_USER = '%s'"
+        curso.execute(query, (cpf, senha))
+
+        conexao.commit()
+        curso.close()
+        conexao.close()
+
+        # Altera o estado do admin
+        if senha == senha_admin:
+            admin = True
+            login_status = 2
+        else:
+            admin = False
+            login_status = 1
+
+        return redirect(url_for("index"))
+
+    except mysql.connector.Error as err:
+        return f"Erro ao gravar no Banco: {err}"
+
+
         
 @app.route('/excluir/<cpf>')
 def excluir(cpf):

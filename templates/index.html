@@ -33,7 +33,11 @@
       </a>
 
       {% if login_status == 0 %}
-      <a href="/login" class="btn-cadastrar">Cadastrar/Logar usuário</a>
+      <a href="/cadastrar-cliente" class="btn-cadastrar">Cadastrar usuário</a>
+      {% endif %}
+
+      {% if login_status == 0 %}
+      <a href="/login" class="btn-cadastrar">Logar usuário</a>
       {% endif %}
 
       {% if login_status == 1 or login_status == 2 %}
