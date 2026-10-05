@@ -12,7 +12,7 @@ bd_config = {
     'ssl_disabled': True
 }
 
-senha_admin = "pipoca"
+senha_admin = "pipoca3308"
 login_status = 0
 
 @app.route("/")
@@ -65,6 +65,12 @@ def tabela_clinicas():
 
     except mysql.connector.Error as err:
         return f"Erro ao carregar os animais de clínica: {err}"
+    
+@app.route('/deslogar')
+def deslogar():
+    global login_status
+    login_status = 0
+    return redirect(url_for('index'))
     
 @app.route('/petshop')
 def tabela_petshops():
@@ -163,36 +169,36 @@ def criarCadUser():
     
 
 @app.route('/logar_usuario', methods=['POST'])
-def LogarUser(cpf,senha):
+def LogarUser():
     global admin # Permite alterar a variável global 'admin' declarada no topo do código
     global login_status
     
     try:
+        cpf = request.form["cpf_cliente-login"]
+        senha = request.form["senha-login"]
 
         conexao = mysql.connector.connect(**bd_config)
-        curso = conexao.cursor()
+        curso = conexao.cursor(dictionary=True)
 
-        query = "SELECT * FROM cliente1 WHERE CPF_USER = '%s' AND SENHA_USER = '%s'"
+        query = "SELECT * FROM cliente1 WHERE CPF_USER = %s AND SENHA_USER = %s"
         curso.execute(query, (cpf, senha))
+        
+        usuario = curso.fetchone()
 
-        conexao.commit()
-        curso.close()
-        conexao.close()
+        if usuario:
+            if senha == senha_admin:
+                admin = True
+                login_status = 2
+            else:
+                admin = False
+                login_status = 1
 
-        # Altera o estado do admin
-        if senha == senha_admin:
-            admin = True
-            login_status = 2
+            return redirect(url_for('index'))
         else:
-            admin = False
-            login_status = 1
-
-        return redirect(url_for("index"))
+            return "CPF ou senha incorretos."
 
     except mysql.connector.Error as err:
-        return f"Erro ao gravar no Banco: {err}"
-
-
+        return f"Erro ao acessar o banco de dados: {err}"
         
 @app.route('/excluir/<cpf>')
 def excluir(cpf):
